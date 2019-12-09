@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Carts.Models.OrderDetail>
+@{
+    ViewBag.Title = "商品明細";
+}
+
+<h2>@String.Format("訂單編號{0}商品列表", this.Model.FirstOrDefault().Id)</h2>
+<hr />
+@Html.ActionLink("回商品列表", "Index", new { }, new { @class = "btn btn-default" })
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("回商品列表", "Index", new { }, new { @class = "btn btn-default" })
+
+

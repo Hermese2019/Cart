@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Carts.Models.ManageUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>網站會員管理</h2>
+@if(ViewBag.ResultMessage != null)
+{
+    @Html.Label("info",(string)ViewBag.ResultMessage,new { @class="text-info"})
+}
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(Model=>Model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model=>Model.Email)
+            </th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(p => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(p => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("編輯","Edit",new { id=item.Id}, new { @class ="btn btn-success"} )
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

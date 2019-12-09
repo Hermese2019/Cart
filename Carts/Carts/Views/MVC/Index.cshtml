@@ -1,0 +1,55 @@
+﻿@model List<Carts.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+@section styles{
+    <style>
+        .Delete {
+            display: inline-block;
+        }
+    </style>
+}
+
+<br />
+@Html.ActionLink("新增資料", "Create", "MVC", null, new { @class = "btn btn-success" })
+<h2>商品列表</h2>
+@if (TempData["ResultMessage"] != null)
+{
+    @Html.Label("info", (string)TempData["ResultMessage"], new { @class = "text-info" })
+}
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td>商品圖</td>
+            <td>編號</td>
+            <td>名稱</td>
+            <td>描述</td>
+            <td>售價</td>
+            <td>庫存</td>
+            <td>操作</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td><img src="@item.DefaultImageURL" width="50" height="50" /></td>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+            <td>@item.Price</td>
+            <td>@item.Quantity</td>
+            <td>
+                @Html.ActionLink("編輯", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })
+                @using (Html.BeginForm("Delete", "MVC", FormMethod.Post, new { @class = "Delete" }))
+                {
+                    @Html.Hidden("Id", item.Id)
+                    <input type="submit" value="刪除" class="btn btn-danger" />
+                }
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
